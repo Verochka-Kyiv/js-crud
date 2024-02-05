@@ -22,9 +22,8 @@ class User {
 
   static getList = () => this.#list
 
-  static getById = (id) => {
+  static getById = (id) =>
     this.#list.find((user) => user.id === id)
-  }
 
   static deleteById = (id) => {
     const index = this.#list.findIndex(
