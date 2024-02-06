@@ -6,23 +6,25 @@
 <main>
 
   <div class="product-card">
-    <h2 class="card-title">Інформація про товар</h2>
-    <div class="field-row">
-      <input type="text" class="field" placeholder="Назва товару">
-      <input type="text" class="field" placeholder="Ціна">
-      <input type="text" class="field" placeholder="ID">
-    </div>
-    <div class="field-row">
-      <textarea class="field description" placeholder="Короткий опис товару"></textarea>
-      <label class="checkbox-label">
-        <input type="checkbox" class="checkbox">
-        <span class="checkbox-text">Відображається у картці товару</span>
-      </label>
-    </div>
-    <div class="button-row">
-      <a href="/product-edit" class="save-button">Зберегти оновлення</a>
-      <a href="/product-delete" class="delete-button">Видалити товар</a>
-    </div>
+    <form method="POST" action="/product-edit">
+      <h2 class="card-title">Інформація про товар</h2>
+      <div class="field-row">
+        <input type="text" class="field" placeholder="Назва товару">
+        <input type="text" class="field" placeholder="Ціна">
+        <input type="text" class="field" placeholder="ID">
+      </div>
+      <div class="field-row">
+        <textarea class="field description" placeholder="Короткий опис товару"></textarea>
+        <label class="checkbox-label">
+          <input type="checkbox" class="checkbox">
+          <span class="checkbox-text">Відображається у картці товару</span>
+        </label>
+      </div>
+      <div class="button-row">
+        <a href="/product-edit" class="save-button">Зберегти оновлення</a>
+        <a href="/product-delete" class="delete-button">Видалити товар</a>
+      </div>
+    </form>
   </div>
 
 </main>
