@@ -54,6 +54,52 @@ class User {
     }
   }
 }
+
+class Product {
+  static #list = []
+
+  constructor(name, price, description) {
+    this.id = Math.floor(Math.random() * 90000) + 10000 // Генеруємо випадкове 5-значне число
+    this.createDate = new Date().toISOString()
+    this.name = name
+    this.price = price
+    this.description = description
+  }
+
+  static getList = () => [...this.#list]
+
+  static add = (product) => {
+    this.#list.push(product)
+  }
+
+  static getById = (id) => {
+    return this.#list.find((product) => product.id === id)
+  }
+
+  static updateById = (id, data) => {
+    const product = this.getById(id)
+    if (product) {
+      if (data.name) product.name = data.name
+      if (data.price) product.price = data.price
+      if (data.description)
+        product.description = data.description
+      return true
+    }
+    return false
+  }
+
+  static deleteById = (id) => {
+    const index = this.#list.findIndex(
+      (product) => product.id === id,
+    )
+    if (index !== -1) {
+      this.#list.splice(index, 1)
+      return true
+    }
+    return false
+  }
+}
+
 // ============================================================
 // router.get Створює нам один ентпоїнт
 
@@ -123,6 +169,110 @@ router.post('/user-update', function (req, res) {
   })
 
   // ↑↑ сюди вводимо JSON дані
+})
+// ==========================================================
+router.get('/product-list', function (req, res) {
+  const products = Product.getList()
+  res.render('product-list', { products })
+})
+// GET endpoint для сторінки створення товару
+router.get('/product-create', (req, res) => {
+  res.render('product-create')
+})
+
+// POST endpoint для створення товару
+router.post('/product-create', (req, res) => {
+  const { name, price, description } = req.body
+  const product = new Product(name, price, description)
+  Product.add(product)
+  res.render('alert', {
+    title: 'Alert',
+    message: 'Товар успішно створено!',
+    buttonLabel: 'Повернутися назад',
+  })
+})
+// GET endpoint для сторінки редагування товару
+router.get('/product-edit', (req, res) => {
+  const productId = req.query.id
+  const product = Product.getById(Number(productId))
+  if (!product) {
+    // Якщо товар з таким ID не знайдено, показуємо повідомлення
+    res.render('alert', {
+      title: 'Alert',
+      message: 'Товар з таким ID не знайдено',
+      buttonLabel: 'Повернутися назад',
+    })
+  } else {
+    res.render('product-edit', { product })
+  }
+})
+
+// POST endpoint для оновлення товару
+router.post('/product-edit', (req, res) => {
+  const { id, name, price, description } = req.body
+  const updatedData = { name, price, description }
+  const success = Product.updateById(
+    Number(id),
+    updatedData,
+  )
+  if (success) {
+    res.render('alert', {
+      title: 'Alert',
+      message: 'Товар успішно оновлено!',
+      buttonLabel: 'Повернутися назад',
+    })
+  } else {
+    res.render('alert', {
+      title: 'Alert',
+      message: 'Товар з таким ID не знайдено',
+      buttonLabel: 'Повернутися назад',
+    })
+  }
+})
+// GET endpoint для сторінки видалення товару
+router.get('/product-delete', (req, res) => {
+  const productId = req.query.id
+  const product = Product.getById(Number(productId))
+  const success = Product.deleteById(Number(id))
+  if (success) {
+    res.render('alert', {
+      title: 'Alert',
+      message: 'Товар успішно видалено!',
+      buttonLabel: 'Повернутися назад',
+    })
+  } else {
+    res.render('alert', {
+      title: 'Alert',
+      message: 'Товар з таким ID не знайдено',
+      buttonLabel: 'Повернутися назад',
+    })
+  }
+})
+
+// POST endpoint для видалення товару
+router.post('/product-delete', (req, res) => {
+  const { id } = req.body
+  const success = Product.deleteById(Number(id))
+  if (success) {
+    res.render('alert', {
+      title: 'Alert',
+      message: 'Товар успішно видалено!',
+      buttonLabel: 'Повернутися назад',
+    })
+  } else {
+    res.render('alert', {
+      title: 'Alert',
+      message: 'Товар з таким ID не знайдено',
+      buttonLabel: 'Повернутися назад',
+    })
+  }
+})
+
+// GET ендпоінт для сторінки /container/alert
+router.get('/alert', function (req, res) {
+  res.render('alert', {
+    title: 'Alert',
+  })
 })
 // ==========================================================
 
