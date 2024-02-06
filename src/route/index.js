@@ -66,7 +66,7 @@ class Product {
     this.description = description
   }
 
-  static getList = () => [...this.#list]
+  static getList = () => this.#list
 
   static add = (product) => {
     this.#list.push(product)
@@ -173,23 +173,46 @@ router.post('/user-update', function (req, res) {
 // ==========================================================
 router.get('/product-list', function (req, res) {
   const products = Product.getList()
-  res.render('product-list', { products })
+  console.log(list)
+
+  res.render('product-list', {
+    style: 'product-list',
+    data: {
+      products: {
+        list,
+        isEmpty: list.length === 0,
+      },
+    },
+  })
 })
 // GET endpoint для сторінки створення товару
-router.get('/product-create', (req, res) => {
-  res.render('product-create')
+
+router.get('/product-create', function (req, res) {
+  // res.render генерує нам HTML сторінку
+  const list = Product.getList()
+  // ↙️ cюди вводимо назву файлу з сontainer
+  res.render('product-create', {
+    // вказуємо назву папки контейнера, в якій знаходяться наші стилі
+    style: 'product-create',
+  })
+  // ↑↑ сюди вводимо JSON дані
 })
+//
 
 // POST endpoint для створення товару
-router.post('/product-create', (req, res) => {
+router.post('/product-create', function (req, res) {
+  // res.render генерує нам HTML сторінку
   const { name, price, description } = req.body
   const product = new Product(name, price, description)
   Product.add(product)
+  console.log(Product.getList())
+  // ↙️ cюди вводимо назву файлу з сontainer
   res.render('alert', {
-    title: 'Alert',
-    message: 'Товар успішно створено!',
-    buttonLabel: 'Повернутися назад',
+    // вказуємо назву папки контейнера, в якій знаходяться наші стилі
+    style: 'alert',
+    info: 'Товар успішно додано',
   })
+  // ↑↑ сюди вводимо JSON дані
 })
 // GET endpoint для сторінки редагування товару
 router.get('/product-edit', (req, res) => {
