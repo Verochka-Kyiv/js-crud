@@ -1,0 +1,25 @@
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.product-card {
+  border: 1px solid #ccc;
+  padding: 20px;
+}
+
+.product-title {
+  font-weight: bold;
+}
+
+.product-price {
+  text-align: right;
+}
+
+.edit-link {
+  text-decoration: none;
+  color: blue;
+}
+
+/*# sourceMappingURL=style.css.map */
