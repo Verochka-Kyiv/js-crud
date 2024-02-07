@@ -9,19 +9,20 @@
     <form method="POST" action="/product-edit">
       <h2 class="card-title">Інформація про товар</h2>
       <div class="field-row">
-        <input type="text" class="field" placeholder="Назва товару">
-        <input type="text" class="field" placeholder="Ціна">
-        <input type="text" class="field" placeholder="ID">
+        <label for="name">Назва товару:</label><br>
+        <input type="text" id="id" name="name" placeholder="Назва товару">
+        <label for="name">Ціна:</label><br>
+        <input type="text" id="id" name="name" placeholder="Ціна">
+        <label for="name">ID товару:</label><br>
+        <input type="text" id="id" name="name" placeholder="ID">
       </div>
       <div class="field-row">
-        <textarea class="field description" placeholder="Короткий опис товару"></textarea>
-        <label class="checkbox-label">
-          <input type="checkbox" class="checkbox">
-          <span class="checkbox-text">Відображається у картці товару</span>
-        </label>
+        <label for="description">Короткий опис товару:</label><br>
+        <textarea id="id" name="description" rows="4"></textarea><br>
+        <small>Відображається у полі товару</small>
       </div>
       <div class="button-row">
-        <a href="/product-edit" class="save-button">Зберегти оновлення</a>
+        <button class="save-button" onclick="window.location.href='/product-edit'">Зберегти оновлення</button>
         <a href="/product-delete" class="delete-button">Видалити товар</a>
       </div>
     </form>
