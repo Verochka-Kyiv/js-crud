@@ -216,39 +216,47 @@ router.post('/product-create', function (req, res) {
 })
 // GET endpoint для сторінки редагування товару
 router.get('/product-edit', (req, res) => {
-  const productId = req.query.id
-  const product = Product.getById(Number(productId))
-  if (!product) {
+  const { id } = req.query
+  const product = Product.getById(Number(id))
+  if (product) {
     // Якщо товар з таким ID не знайдено, показуємо повідомлення
-    res.render('alert', {
-      title: 'Alert',
-      message: 'Товар з таким ID не знайдено',
-      buttonLabel: 'Повернутися назад',
+    return res.render('product-edit', {
+      style: 'product-edit',
+      data: {
+        name: product.name,
+        price: product.price,
+        id: product.id,
+        description: product.description,
+      },
     })
   } else {
-    res.render('product-edit', { product })
+    return res.render('alert', {
+      style: 'alert',
+      info: 'Продукту за таким ID не знайдено',
+    })
   }
 })
 
 // POST endpoint для оновлення товару
-router.post('/product-edit', (req, res) => {
+router.post('/product-edit', function (req, res) {
   const { id, name, price, description } = req.body
   const updatedData = { name, price, description }
-  const success = Product.updateById(
-    Number(id),
-    updatedData,
-  )
-  if (success) {
+  const product = Product.updateById(Number(id), {
+    name,
+    price,
+    description,
+  })
+  console.log(id)
+  console.log(product)
+  if (product) {
     res.render('alert', {
-      title: 'Alert',
-      message: 'Товар успішно оновлено!',
-      buttonLabel: 'Повернутися назад',
+      style: 'alert',
+      info: 'Інформація про товар оновлена',
     })
   } else {
     res.render('alert', {
-      title: 'Alert',
-      message: 'Товар з таким ID не знайдено',
-      buttonLabel: 'Повернутися назад',
+      style: 'alert',
+      info: 'Сталася помилка',
     })
   }
 })
