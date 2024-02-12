@@ -1,4 +1,4 @@
-.container {
+.form {
   width: 50%;
   margin: auto;
   padding: 20px;
@@ -6,10 +6,10 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   background-color: #fff;
 }
-.container h2 {
+.form h2 {
   color: blue;
 }
-.container input[type=text], .container input[type=number], .container textarea {
+.form input[type=text], .form input[type=number], .form textarea {
   width: 100%;
   padding: 10px;
   margin-bottom: 10px;
@@ -17,7 +17,7 @@
   border-radius: 5px;
   box-sizing: border-box;
 }
-.container .button {
+.form .button {
   background-color: blue;
   color: #fff;
   padding: 10px 20px;

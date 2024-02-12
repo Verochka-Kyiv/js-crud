@@ -2,10 +2,11 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
+  background-color: aquamarine;
 }
 
 .product-card {
-  border: 1px solid #ccc;
+  border: 1px solid #801c1c;
   padding: 20px;
 }
 

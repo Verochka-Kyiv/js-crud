@@ -172,8 +172,7 @@ router.post('/user-update', function (req, res) {
 })
 // ==========================================================
 router.get('/product-list', function (req, res) {
-  const products = Product.getList()
-  console.log(list)
+  const list = Product.getList()
 
   res.render('product-list', {
     style: 'product-list',
