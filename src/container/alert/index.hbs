@@ -4,17 +4,14 @@
 }}
 
 <main>
-  <form method="POST" action="/alert">
-    <div class="container">
-      <div class="alert-card">
-        <div class="message">
-          <span class="bold">Успішне виконання дії</span><br>
-          Товар був успішно видалений!
-        </div>
-        <button class="button">Повернутися назад</button>
-      </div>
+
+  <div class="container">
+    <div class="alert-card">
+      <h1>{{info}}</h1>
+      <a href="/product-create">Повернутися назад</a>
+      <a href="/product-list">Список товарів</a>
     </div>
-  </form>
+
 </main>
 
 

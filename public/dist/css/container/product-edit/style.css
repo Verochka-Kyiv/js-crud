@@ -56,12 +56,12 @@
   cursor: pointer;
 }
 
-.save-button {
+.form__button {
   background-color: blue;
   color: #fff;
 }
 
-.delete-button {
+.form__button_red {
   background-color: red;
   color: #fff;
 }
