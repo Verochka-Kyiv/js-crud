@@ -60,32 +60,39 @@ class Product {
 
   constructor(name, price, description) {
     this.id = Math.floor(Math.random() * 90000) + 10000 // Генеруємо випадкове 5-значне число
-    this.createDate = new Date().toISOString()
+    //this.createDate = new Date().toISOString()
+
+    this.createDate = () => {
+      this.date = new Date().toISOString()
+    }
+
     this.name = name
     this.price = price
     this.description = description
   }
 
   static getList = () => this.#list
+  checkId = (id) => this.id === id
 
   static add = (product) => {
     this.#list.push(product)
   }
 
-  static getById = (id) => {
-    return this.#list.find((product) => product.id === id)
-  }
+  static getById = (id) =>
+    this.#list.find((product) => product.id === id)
 
   static updateById = (id, data) => {
     const product = this.getById(id)
+    const { name } = data
     if (product) {
-      if (data.name) product.name = data.name
-      if (data.price) product.price = data.price
-      if (data.description)
-        product.description = data.description
+      if (name) {
+        product.name = name
+      }
+
       return true
+    } else {
+      return false
     }
-    return false
   }
 
   static deleteById = (id) => {
@@ -95,8 +102,9 @@ class Product {
     if (index !== -1) {
       this.#list.splice(index, 1)
       return true
+    } else {
+      return false
     }
-    return false
   }
 }
 
@@ -187,7 +195,6 @@ router.get('/product-list', function (req, res) {
 // GET endpoint для сторінки створення товару
 
 router.get('/product-create', function (req, res) {
-  // res.render генерує нам HTML сторінку
   const list = Product.getList()
   // ↙️ cюди вводимо назву файлу з сontainer
   res.render('product-create', {
