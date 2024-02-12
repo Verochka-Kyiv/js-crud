@@ -83,10 +83,17 @@ class Product {
 
   static updateById = (id, data) => {
     const product = this.getById(id)
-    const { name } = data
     if (product) {
+      const { name, price, description } = data
+
       if (name) {
         product.name = name
+      }
+      if (price) {
+        product.price = price
+      }
+      if (description) {
+        product.description = description
       }
 
       return true
@@ -220,12 +227,12 @@ router.post('/product-create', function (req, res) {
   })
   // ↑↑ сюди вводимо JSON дані
 })
+
 // GET endpoint для сторінки редагування товару
 router.get('/product-edit', (req, res) => {
   const { id } = req.query
   const product = Product.getById(Number(id))
   if (product) {
-    // Якщо товар з таким ID не знайдено, показуємо повідомлення
     return res.render('product-edit', {
       style: 'product-edit',
       data: {
@@ -246,7 +253,7 @@ router.get('/product-edit', (req, res) => {
 // POST endpoint для оновлення товару
 router.post('/product-edit', function (req, res) {
   const { id, name, price, description } = req.body
-  const updatedData = { name, price, description }
+  //const updatedData = { name, price, description }
   const product = Product.updateById(Number(id), {
     name,
     price,
@@ -267,23 +274,17 @@ router.post('/product-edit', function (req, res) {
   }
 })
 // GET endpoint для сторінки видалення товару
-router.get('/product-delete', (req, res) => {
-  const productId = req.query.id
-  const product = Product.getById(Number(productId))
-  const success = Product.deleteById(Number(id))
-  if (success) {
-    res.render('alert', {
-      title: 'Alert',
-      message: 'Товар успішно видалено!',
-      buttonLabel: 'Повернутися назад',
-    })
-  } else {
-    res.render('alert', {
-      title: 'Alert',
-      message: 'Товар з таким ID не знайдено',
-      buttonLabel: 'Повернутися назад',
-    })
-  }
+router.get('/product-delete', function (req, res) {
+  // res.render генерує нам HTML сторінку
+  const { id } = req.query
+  Product.deleteById(Number(id))
+  // ↙️ cюди вводимо назву файлу з сontainer
+  res.render('alert', {
+    // вказуємо назву папки контейнера, в якій знаходяться наші стилі
+    style: 'alert',
+    info: 'Товар видалений',
+  })
+  // ↑↑ сюди вводимо JSON дані
 })
 
 // POST endpoint для видалення товару
