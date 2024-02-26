@@ -87,22 +87,22 @@ Product.add(
 // router.get Створює нам один ентпоїнт
 
 // ↙️ тут вводимо шлях (PATH) до сторінки
-router.get('/', function (req, res) {
-  // res.render генерує нам HTML сторінку
+// router.get('/', function (req, res) {
+//   // res.render генерує нам HTML сторінку
 
-  // ↙️ cюди вводимо назву файлу з сontainer
-  res.render('index', {
-    // вказуємо назву папки контейнера, в якій знаходяться наші стилі
-    style: 'index',
-    data: {},
-  })
-  // ↑↑ сюди вводимо JSON дані
-})
+//   // ↙️ cюди вводимо назву файлу з сontainer
+//   res.render('index', {
+//     // вказуємо назву папки контейнера, в якій знаходяться наші стилі
+//     style: 'index',
+//     data: {},
+//   })
+//   // ↑↑ сюди вводимо JSON дані
+// })
 // ============================================================
 // router.get Створює нам один ентпоїнт
 
 // ↙️ тут вводимо шлях (PATH) до сторінки
-router.get('/purchase-index', function (req, res) {
+router.get('/', function (req, res) {
   // res.render генерує нам HTML сторінку
   // ↙️ cюди вводимо назву файлу з сontainer
   res.render('purchase-index', {
@@ -110,20 +110,27 @@ router.get('/purchase-index', function (req, res) {
     style: 'purchase-index',
     data: {
       list: Product.getList(),
-
-      //   img: 'http://picsum.photos/200/300',
-      //   title: `Комп'ютер Artline Gaming(X43v31) AMD Ryzen 5 3600`,
-      //   description:
-      //     'AMD Ryzen 5 3600 (3.6 - 4.2 ГГц) / RAM 16 ГБ / HDD 1 ТБ + SSD 480 ГБ / nVidia GeForce RTX 3050, 8 ГБ / без ОД / LAN / без ОС',
-      //   category: [
-      //     { id: 1, text: 'Готовий до відправки' },
-      //     { id: 2, text: 'ТОП продажів' },
-      //   ],
-      //   price: 27000,
     },
   })
   // ↑↑ сюди вводимо JSON дані
 })
+
+// ==========================================================
+router.get('/purchase-product', function (req, res) {
+  const id = Number(req.query.id)
+  // res.render генерує нам HTML сторінку
+  // ↙️ cюди вводимо назву файлу з сontainer
+  res.render('purchase-product', {
+    // вказуємо назву папки контейнера, в якій знаходяться наші стилі
+    style: 'purchase-product',
+    data: {
+      list: Product.getRandomList(id),
+      product: Product.getById(id),
+    },
+  })
+  // ↑↑ сюди вводимо JSON дані
+})
+
 // ==========================================================
 router.get('/purchase-alert', function (req, res) {
   // res.render генерує нам HTML сторінку
