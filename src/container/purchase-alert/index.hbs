@@ -2,10 +2,13 @@
 Це код container файлу для index сторінки,
 в якому міститься код, котрий буде віддаватися по шляху (PATH) - "/"
 }}
-
-<main>
-  Index page
-</main>
+<div class="card">
+  <div class="card__header">
+    <h2 class="card__title">{{data.message}}</h2>
+    <h3 class="card__subtitle">{{data.info}}</h3>
+  </div>
+  <a href="{{data.link}}" class="card__button card__button--blue">Повернутися назад</a>
+</div>
 
 
 
