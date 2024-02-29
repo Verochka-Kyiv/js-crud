@@ -3,12 +3,7 @@
 в якому міститься код, котрий буде віддаватися по шляху (PATH) - "/"
 }}
 <main class="main">
-  {{> heading title="Інші товари" info="Комп'ютери та ноутбуки"}}
-  {{!-- <div class="product-list">
-    {{#each data.list}}
-    {{> purchase-product data=this}}
-    {{/each}}
-  </div> --}}
+  {{> heading title="Інформація про товар" }}
   {{#with data.product}}
   <form method="POST" action="/purchase-create?id={{id}}">
     <div class="product-info">
@@ -32,7 +27,12 @@
     </div>
   </form>
   {{/with}}
-
+  {{> heading title="Інші товари" info="Комп'ютери та ноутбуки"}}
+  <div class="product-list">
+    {{#each data.list}}
+    {{> purchase-product data=this}}
+    {{/each}}
+  </div>
 
 
 </main>
