@@ -18,7 +18,7 @@
     </div>
     {{>divider}}
     <div class="info_row">
-      <span>Назва товару: {{product}}</span>
+      <span>Назва товару: {{product.title}}</span>
       <span>Коментар: {{comment}}</span>
     </div>
     {{>divider}}
@@ -57,7 +57,9 @@
       Всього: {{totalPrice}} грн, ({{bonus}} грн бонусів)</strong>
 
 
-    {{>button text="Змінити дані"}}
+    <a href='/purchase-update?id={{id}}'>
+      {{> button text="Змінити дані"}}
+    </a>
     {{!--
   </form> --}}
   {{/with}}

@@ -471,7 +471,7 @@ router.get('/purchase-list', function (req, res) {
 // ==========================================================
 router.get('/purchase-info', function (req, res) {
   const id = Number(req.query.id)
-  const purchase = Purchase.getById
+  const purchase = Purchase.getById(id)
   const bonus = Purchase.calcBonusAmount(
     purchase.totalPrice,
   )
@@ -499,6 +499,56 @@ router.get('/purchase-info', function (req, res) {
   })
   // ↑↑ сюди вводимо JSON дані
 })
+
+// ==========================================================
+router.post('/purchase-update', function (req, res) {
+  const id = Number(req.query.id)
+  const purchase = Purchase.getById(id)
+  // res.render генерує нам HTML сторінку
+  // ↙️ cюди вводимо назву файлу з сontainer
+  res.render('purchase-update', {
+    // вказуємо назву папки контейнера, в якій знаходяться наші стилі
+    style: 'purchase-update',
+    data: {
+      id: purchase.id,
+      firstname: purchase.firstname,
+      lastname: purchase.lastname,
+      phone: purchase.phone,
+      email: purchase.email,
+    },
+  })
+  // ↑↑ сюди вводимо JSON дані
+})
+// ==========================================================
+router.get('/purchase-update', function (req, res) {
+  const id = Number(req.query.id)
+  const purchase = Purchase.getById(id)
+
+  if (!purchase) {
+    // Якщо товар з таким id не знайдено, відображаємо повідомлення про помилку
+    res.render('purchase-alert', {
+      style: 'purchase-alert',
+      isError: true,
+      title: 'Помилка',
+      info: 'Замовлення з таким ID не знайдено',
+    })
+  } else {
+    // Якщо товар знайдено, передаємо його дані у шаблон product-edit
+    res.render('purchase-update', {
+      style: 'purchase-update',
+      title: 'Зміна данних замовлення',
+      data: {
+        id: purchase.id,
+        firstname: purchase.firstname,
+        lastname: purchase.lastname,
+        phone: purchase.phone,
+        email: purchase.email,
+        delivery: purchase.delivery,
+      },
+    })
+  }
+})
+
 // ==========================================================
 // Підключаємо роутер до бек-енду
 module.exports = router

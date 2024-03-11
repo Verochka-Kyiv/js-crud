@@ -12,14 +12,3 @@
     padding: s.space(10);
 }
 
-.info_row {
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* Розподіл стовпців у співвідношенні 1:1 */
-    grid-column-gap: 20px; /* Відступ між стовпцями */
-    padding: 5px;
- 
-}
-.info_row > span {
-    padding: 12px;
-    margin: 8px;
-}
