@@ -1,19 +1,30 @@
 .field {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 20px;
   width: 100%;
   margin-top: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  padding: 4px;
 }
 
 .field__label {
   font-size: 14px;
+  padding: 4px;
+  margin: 4px;
 }
 
 .field__input {
-  border: 1px solid #ddd;
+  border: 1px solid rgb(96, 102, 118);
   padding: 8px;
+  border-radius: 10px;
+  border-color: rgb(87, 159, 210);
+  margin: 10px;
+}
+
+.field--disabled {
+  position: absolute;
+  display: none;
 }
 
 /*# sourceMappingURL=style.css.map */
