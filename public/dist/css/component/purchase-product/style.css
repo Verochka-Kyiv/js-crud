@@ -1,6 +1,6 @@
 .product-card {
   border-radius: 10px;
-  border: 1px solid;
+  border: 1px solid rgb(87, 159, 210);
   padding: 16px;
   display: flex;
   flex-direction: column;
@@ -10,7 +10,7 @@
 
 .product-card__image {
   max-height: 300px;
-  width: 100%;
+  width: 300px;
 }
 
 .product-card__title {
