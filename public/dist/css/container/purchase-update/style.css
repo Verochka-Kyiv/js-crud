@@ -1,4 +1,3 @@
-@charset "UTF-8";
 .heading {
   display: flex;
   flex-direction: column;
@@ -125,18 +124,6 @@
   flex-direction: column;
   gap: 40px;
   padding: 40px;
-}
-
-.info_row {
-  display: grid;
-  grid-template-columns: 1fr 1fr; /* Розподіл стовпців у співвідношенні 1:1 */
-  grid-column-gap: 20px; /* Відступ між стовпцями */
-  padding: 5px;
-}
-
-.info_row > span {
-  padding: 12px;
-  margin: 8px;
 }
 
 /*# sourceMappingURL=style.css.map */
