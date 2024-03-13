@@ -528,7 +528,7 @@ router.post(
           data: {
             link: '/purchase-list',
             title: 'Успіх',
-            info: 'товар успешно оновлено',
+            info: 'Дані успішно оновлено',
           },
         })
       } else {
@@ -540,7 +540,7 @@ router.post(
           data: {
             link: '/purchase-list',
             title: 'Помилка',
-            info: 'Не вдалося оновити товар',
+            info: 'Не вдалося оновити дані',
           },
         })
       }
@@ -553,7 +553,7 @@ router.post(
         data: {
           link: '/purchase-list',
           title: 'Помилка',
-          info: 'Не вдалося оновити товар',
+          info: 'Не вдалося оновити дані',
         },
       })
     }
