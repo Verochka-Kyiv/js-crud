@@ -501,24 +501,77 @@ router.get('/purchase-info', function (req, res) {
 })
 
 // ==========================================================
-router.post('/purchase-update', function (req, res) {
-  const id = Number(req.query.id)
-  const purchase = Purchase.getById(id)
-  // res.render генерує нам HTML сторінку
-  // ↙️ cюди вводимо назву файлу з сontainer
-  res.render('purchase-update', {
-    // вказуємо назву папки контейнера, в якій знаходяться наші стилі
-    style: 'purchase-update',
-    data: {
-      id: purchase.id,
-      firstname: purchase.firstname,
-      lastname: purchase.lastname,
-      phone: purchase.phone,
-      email: purchase.email,
-    },
-  })
+router.post(
+  '/purchase-update',
+  function (req, res) {
+    const id = Number(req.query.id)
+    let { firstname, lastname, phone, email, delivery } =
+      req.body
+    const purchase = Purchase.getById(id)
+    console.log(purchase)
+
+    if (purchase) {
+      const newPurchase = Purchase.updateById(id, {
+        firstname,
+        lastname,
+        phone,
+        email,
+        delivery,
+      })
+      console.log(newPurchase)
+      //якщо успішно
+      if (newPurchase) {
+        res.render('purchase-alert', {
+          style: 'purchase-alert',
+          component: ['button', 'heading'],
+
+          data: {
+            link: '/purchase-list',
+            title: 'Успіх',
+            info: 'товар успешно оновлено',
+          },
+        })
+      } else {
+        //Якщо оновлення не вдалося
+        res.render('purchase-alert', {
+          style: 'purchase-alert',
+          component: ['button', 'heading'],
+
+          data: {
+            link: '/purchase-list',
+            title: 'Помилка',
+            info: 'Не вдалося оновити товар',
+          },
+        })
+      }
+    } else {
+      // Якщо оновлення не вдалося
+      res.render('purchase-alert', {
+        style: 'purchase-alert',
+        component: ['button', 'heading'],
+
+        data: {
+          link: '/purchase-list',
+          title: 'Помилка',
+          info: 'Не вдалося оновити товар',
+        },
+      })
+    }
+  },
+
+  // res.render('purchase-update', {
+  //   // вказуємо назву папки контейнера, в якій знаходяться наші стилі
+  //   style: 'purchase-update',
+  //   data: {
+  //     id: purchase.id,
+  //     firstname: purchase.firstname,
+  //     lastname: purchase.lastname,
+  //     phone: purchase.phone,
+  //     email: purchase.email,
+  //   },
+  // }),
   // ↑↑ сюди вводимо JSON дані
-})
+)
 // ==========================================================
 router.get('/purchase-update', function (req, res) {
   const id = Number(req.query.id)
