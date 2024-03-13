@@ -10,10 +10,10 @@
     <span>ID: {{id}}</span>
 
     <div class="data_row">
-      {{>field-update label="Ім'я" name=firstname}}
-      {{>field-update label="Прізвище " name=lastname}}
-      {{>field-update label="Телефон " name=phone}}
-      {{>field-update label="Пошта " name=email}}
+      {{>field label="Ім'я" name='firstname' value=firstname}}
+      {{>field label="Прізвище " name='lastname' value=lastname}}
+      {{>field label="Телефон " name='phone' value=phone}}
+      {{>field label="Пошта " name='email' value=email}}
 
     </div>
     {{>button text="Зберегти зміни"}}
