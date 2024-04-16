@@ -17,7 +17,7 @@
 
 .product-card {
   border-radius: 10px;
-  border: 1px solid rgb(87, 159, 210);
+  border: 1px solid #ced4da;
   padding: 16px;
   display: flex;
   flex-direction: column;
@@ -37,12 +37,14 @@
 
 .product-card__subtitle {
   font-size: 16px;
+  color: #bdbdbd;
 }
 
 .product-card__category {
   padding: 5px 10px;
   border-radius: 30px;
   font-size: 14px;
+  color: #121212;
   border: 1px solid transparent;
 }
 
@@ -71,7 +73,7 @@
 }
 
 .button {
-  background-color: rgb(96, 102, 118);
+  background-color: blue;
   color: white;
   border: none;
   border-radius: 10px;
@@ -101,10 +103,10 @@
 }
 
 .field__input {
-  border: 1px solid rgb(96, 102, 118);
+  border: 1px solid blue;
   padding: 8px;
   border-radius: 10px;
-  border-color: rgb(87, 159, 210);
+  border-color: #ced4da;
   margin: 10px;
 }
 
