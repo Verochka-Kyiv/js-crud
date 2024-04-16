@@ -82,20 +82,20 @@ a:hover {
   color: #bdbdbd;
 }
 
-.main__content {
+.search {
   display: grid;
   grid-template-columns: 56px 1fr auto;
-  background-color: #121212;
+  background-color: #292929;
   padding: 8px 32px;
   border-radius: 8px;
   gap: 32px;
   color: #ddd;
   font-size: 24px;
 }
-.main__content__button {
+.search__button {
   transition: opacity 0.6s;
 }
-.main__content__button:hover {
+.search__button:hover {
   opacity: 0.6;
 }
 

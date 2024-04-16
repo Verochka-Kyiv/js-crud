@@ -270,10 +270,10 @@ router.post('/spotify-search', function (req, res) {
 })
 //========================================================
 
-router.get('/spotify-playlist-add', function (req, res) {
+router.get('/spotify-track-add', function (req, res) {
   const playlistId = Number(req.query.playlistId)
-  res.render('spotify-playlist-add', {
-    style: 'spotify-playlist-add',
+  res.render('spotify-track-add', {
+    style: 'spotify-track-add',
     data: {
       //  playlistId: playlist.id,
       //  tracks: Track.getList(),

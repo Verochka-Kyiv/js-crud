@@ -1,11 +1,11 @@
 @use '../../lib/service.scss' as s;
 @use '../../lib/spotify.scss' as spotify;
 
-.main__content {
+.search {
     display: grid;
     grid-template-columns: 56px 1fr auto;
     
-background-color: s.color(dark);
+background-color: #292929;
 padding: s.space(2) s.space(8);
 border-radius: 8px;
     gap: s.space(8);
