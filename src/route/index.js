@@ -206,6 +206,7 @@ router.get('/spotify-playlist', function (req, res) {
 
 router.get('/spotify-track-delete', function (req, res) {
   const playlistId = Number(req.query.playlistId)
+
   const trackId = Number(req.query.trackId)
 
   const playlist = Playlist.getById(playlistId)
@@ -220,7 +221,7 @@ router.get('/spotify-track-delete', function (req, res) {
       },
     })
   }
-  playlist.deletetrackById(trackId)
+  playlist.deleteTrackById(trackId)
 
   res.render('spotify-playlist', {
     style: 'spotify-playlist',
