@@ -124,7 +124,7 @@ Playlist.makeMix(Playlist.create('Test3'))
 // router.get Створює нам один ентпоїнт
 
 // ↙️ тут вводимо шлях (PATH) до сторінки
-router.get('/', function (req, res) {
+router.get('/spotify-choose', function (req, res) {
   // res.render генерує нам HTML сторінку
   // ↙️ cюди вводимо назву файлу з сontainer
   res.render('spotify-choose', {
@@ -170,7 +170,6 @@ router.post('/spotify-create', function (req, res) {
 
   console.log(playlist)
 
-  // console.log(req.body, req.query)
   res.render('spotify-playlist', {
     style: 'spotify-playlist',
     data: {
@@ -233,19 +232,7 @@ router.get('/spotify-track-delete', function (req, res) {
   })
 })
 //=======================================================
-router.get('/spotify-playlist-add', function (req, res) {
-  const playlistId = Number(req.query.playlistId)
-  res.render('spotify-playlist-add', {
-    style: 'spotify-playlist-add',
-    data: {
-      playlistId: playlist.id,
-      tracks: Track.getList(),
-      name: playlist.name,
-    },
-  })
-  // ↑↑ сюди вводимо JSON дані
-})
-//========================================================
+
 router.get('/spotify-search', function (req, res) {
   const value = ''
 
@@ -281,5 +268,20 @@ router.post('/spotify-search', function (req, res) {
   })
 })
 //========================================================
+
+router.get('/spotify-playlist-add', function (req, res) {
+  const playlistId = Number(req.query.playlistId)
+  res.render('spotify-playlist-add', {
+    style: 'spotify-playlist-add',
+    data: {
+      //  playlistId: playlist.id,
+      //  tracks: Track.getList(),
+      //  name: playlist.name,
+    },
+  })
+  // ↑↑ сюди вводимо JSON дані
+})
+//========================================================
+
 // Підключаємо роутер до бек-енду
 module.exports = router
