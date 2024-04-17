@@ -32,32 +32,32 @@ class Track {
 Track.create(
   'Інь Янь',
   'Monatic i ROXILANA',
-  'https://picsum.photo/100/100',
+  'https://picsum.photos/100/100 ',
 )
 Track.create(
   'Baila Conmigo (Remix)',
   'Selena Gomes i Rauw Alejandro',
-  'https://picsum.photo/100/100',
+  'https://picsum.photos/100/100 ',
 )
 Track.create(
   'Shameless',
   'Camila Cabello',
-  'https://picsum.photo/100/100',
+  'https://picsum.photos/100/100 ',
 )
 Track.create(
   'DAKITI',
   'BAD BUNNY i JHAY',
-  'https://picsum.photo/100/100',
+  'https://picsum.photos/100/100 ',
 )
 Track.create(
   '11 PM',
   'Maluma',
-  'https://picsum.photo/100/100',
+  'https://picsum.photos/100/100 ',
 )
 Track.create(
   'Інша любов',
   'Enleo',
-  'https://picsum.photo/100/100',
+  'https://picsum.photos/100/100 ',
 )
 console.log(Track.getList())
 
@@ -69,7 +69,7 @@ class Playlist {
     this.id = Math.floor(1000 + Math.random() * 9000) //генеруємо випадкове id
     this.name = name
     this.tracks = []
-    this.image = 'https://picsum.photo/100/100'
+    this.image = 'https://picsum.photos/100/100'
   }
 
   //статичний метод для створення об'єкту Playlist і додавання його до списку #list
