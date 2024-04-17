@@ -73,8 +73,8 @@ class Playlist {
   }
 
   //статичний метод для створення об'єкту Playlist і додавання його до списку #list
-  static create(name) {
-    const newPlaylist = new Playlist(name)
+  static create(name, image) {
+    const newPlaylist = new Playlist(name, image)
     this.#list.push(newPlaylist)
     return newPlaylist
   }
@@ -124,7 +124,7 @@ Playlist.makeMix(Playlist.create('Test3'))
 // router.get Створює нам один ентпоїнт
 
 // ↙️ тут вводимо шлях (PATH) до сторінки
-router.get('/spotify-choose', function (req, res) {
+router.get('/', function (req, res) {
   // res.render генерує нам HTML сторінку
   // ↙️ cюди вводимо назву файлу з сontainer
   res.render('spotify-choose', {
@@ -176,6 +176,7 @@ router.post('/spotify-create', function (req, res) {
       playlistId: playlist.id,
       tracks: playlist.tracks,
       name: playlist.name,
+      image: playlist.image,
     },
   })
 })
@@ -200,6 +201,7 @@ router.get('/spotify-playlist', function (req, res) {
       playlistId: playlist.id,
       tracks: playlist.tracks,
       name: playlist.name,
+      image: playlist.image,
     },
   })
 })
@@ -229,6 +231,7 @@ router.get('/spotify-track-delete', function (req, res) {
       playlistId: playlist.id,
       tracks: playlist.tracks,
       name: playlist.name,
+      image: playlist.image,
     },
   })
 })
@@ -272,15 +275,63 @@ router.post('/spotify-search', function (req, res) {
 
 router.get('/spotify-track-add', function (req, res) {
   const playlistId = Number(req.query.playlistId)
+  const playlist = Playlist.getById(playlistId)
+  const allTracks = Track.getList()
+
+  console.log(playlistId, playlist, allTracks)
   res.render('spotify-track-add', {
     style: 'spotify-track-add',
     data: {
-      //  playlistId: playlist.id,
-      //  tracks: Track.getList(),
-      //  name: playlist.name,
+      playlistId: playlist.id,
+      tracks: allTracks,
+      // link: `/spotify-track-add?playlistId={{playlistId}}&trackId=={{id}}`,
     },
   })
-  // ↑↑ сюди вводимо JSON дані
+})
+//========================================================
+// Шлях POST для додавання треку до плейліста
+router.post('/spotify-track-add', function (req, res) {
+  const playlistId = Number(req.body.playlistId)
+  const trackId = Number(req.body.trackId)
+
+  const playlist = Playlist.getById(playlistId)
+
+  if (!playlist) {
+    return res.render('purchase-alert', {
+      style: 'purchase-alert',
+      data: {
+        message: 'Помилка',
+        info: 'Такого плейліста не знайдено',
+        link: `/spotify-playlist?id=${playlistId}`,
+      },
+    })
+  }
+
+  const trackToAdd = Track.getList().find(
+    (track) => track.id === trackId,
+  )
+
+  if (!trackToAdd) {
+    return res.render('purchase-alert', {
+      style: 'purchase-alert',
+      data: {
+        message: 'Помилка',
+        info: 'Такого треку не знайдено',
+        link: `/spotify-track-add?playlistId=${playlistId}`,
+      },
+    })
+  }
+
+  playlist.tracks.push(trackToAdd)
+
+  res.render('spotify-playlist', {
+    style: 'spotify-playlist',
+    data: {
+      playlistId: playlist.id,
+      tracks: playlist.tracks,
+      name: playlist.name,
+    },
+  })
 })
 //========================================================
 
